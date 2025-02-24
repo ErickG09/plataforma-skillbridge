@@ -1,0 +1,383 @@
+/* ======================================================= */
+/* 🏗️ MENÚ DE ESTILOS (ÍNDICE) */
+/* ======================================================= */
+/* 1️⃣ Estilos Globales */
+/* 2️⃣ Barra de Navegación */
+/* 3️⃣ Barra de Progreso */
+/* 4️⃣ Contenedor Principal */
+/* 5️⃣ Sección de Bienvenida */
+/* 6️⃣ Formulario de Registro */
+/* 7️⃣ Mensaje de Confirmación */
+/* 8️⃣ Responsividad */
+
+/* ======================================================= */
+/* 1️⃣ ESTILOS GLOBALES */
+/* ======================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* ======================================================= */
+/* 2️⃣ BARRA DE NAVEGACIÓN */
+/* ======================================================= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+}
+
+.navbar-logo img {
+    width: 20%;
+}
+
+/* Botón Iniciar Sesión */
+.login-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: #388e3c;
+    transform: scale(1.05);
+}
+
+/* ======================================================= */
+/* 3️⃣ BARRA DE PROGRESO */
+/* ======================================================= */
+.progress-container {
+    height: 8px;
+    background-color: #ddd;
+    width: 100%;
+    position: relative;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: #4caf50;
+    transition: width 1s ease-in-out;
+}
+
+/* ======================================================= */
+/* 4️⃣ CONTENEDOR PRINCIPAL */
+/* ======================================================= */
+.welcome-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1100px;
+    margin: 3rem auto;
+    padding: 2rem;
+    gap: 3rem;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* ======================================================= */
+/* 5️⃣ SECCIÓN DE BIENVENIDA */
+/* ======================================================= */
+.welcome-content {
+    flex: 1;
+    text-align: center;
+}
+
+.welcome-content h1 {
+    font-size: 2.4rem;
+    color: #222;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.welcome-content p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 2rem;
+    font-weight: 400;
+}
+
+/* Imagen de bienvenida */
+.welcome-image {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.welcome-image:hover {
+    transform: scale(1.05);
+}
+
+/* ======================================================= */
+/* 6️⃣ FORMULARIO DE REGISTRO */
+/* ======================================================= */
+.register-container {
+    flex: 1;
+    text-align: center;
+    padding: 2rem;
+}
+
+/* Contenedor del formulario */
+.register-content {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.register-content h2 {
+    font-size: 2rem;
+    text-align: left;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.register-content p {
+    font-size: 1rem;
+    text-align: left;
+    margin-bottom: 2rem;
+    color: #555;
+    font-weight: 400;
+}
+
+/* Campos del formulario */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #333;
+    text-align: left;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+    background-color: #f9f9f9;
+}
+
+.form-group input:focus {
+    border-color: #4caf50;
+    outline: none;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+    background-color: #fff;
+}
+
+/* Botón de Registro */
+.next-button {
+    width: 100%;
+    padding: 1rem;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.next-button:hover {
+    background-color: #388e3c;
+    transform: scale(1.05);
+}
+
+/* ======================================================= */
+/* 🔹 MENSAJES DE CONFIRMACIÓN Y ERROR */
+/* ======================================================= */
+.message {
+    text-align: center;
+    padding: 1rem;
+    margin: 1rem auto;
+    width: 80%;
+    max-width: 600px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border-radius: 8px;
+}
+
+.message.error {
+    background-color: #ffcccc;
+    color: #d8000c;
+    border: 1px solid #d8000c;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #155724;
+}
+
+.error-message {
+    text-align: center;
+    background-color: #ffcccc;
+    color: #d8000c;
+    border: 1px solid #d8000c;
+    padding: 1rem;
+    margin-top: 1rem;
+    width: 80%;
+    max-width: 600px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border-radius: 8px;
+    display: none;
+}
+
+.success-message {
+    text-align: center;
+    background-color: #ccffcc;
+    color: #007b00;
+    border: 1px solid #007b00;
+    padding: 1rem;
+    margin-top: 1rem;
+    width: 80%;
+    max-width: 600px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border-radius: 8px;
+    display: none;
+}
+
+/* ======================================================= */
+/* 🔹 MENSAJE DE CONFIRMACIÓN CON CAMPO DE MATRÍCULA */
+/* ======================================================= */
+.success-message {
+    text-align: center;
+    padding: 3rem;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.success-message h2 {
+    font-size: 2.5rem;
+    color: #4caf50;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.success-message p {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+/* ======================================================= */
+/* 🔹 FORMULARIO - ESTILOS DE CAMPOS */
+/* ======================================================= */
+.form-group {
+    margin-top: 2rem;
+    text-align: left;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-group label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    color: #333;
+    text-align: left;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+    background-color: #f9f9f9;
+}
+
+.form-group input:focus {
+    border-color: #4caf50;
+    outline: none;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+    background-color: #fff;
+}
+
+/* ======================================================= */
+/* 🔹 BOTONES GENERALES */
+/* ======================================================= */
+.finish-button {
+    margin-top: 1.5rem;
+    padding: 1rem 1.8rem;
+    background-color: #4caf50;
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.finish-button:hover {
+    background-color: #388e3c;
+    transform: scale(1.05);
+}
+
+
+
+
+/* ======================================================= */
+/* 8️⃣ RESPONSIVIDAD */
+/* ======================================================= */
+@media (max-width: 900px) {
+    .welcome-container {
+        flex-direction: column;
+        padding: 2rem;
+        gap: 2rem;
+    }
+
+    .register-container {
+        width: 100%;
+    }
+
+    .register-content {
+        max-width: 100%;
+    }
+
+    .welcome-image {
+        max-width: 100%;
+    }
+
+    .login-button {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+}

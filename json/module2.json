@@ -1,0 +1,44 @@
+{
+    "module": "Module 2",
+    "description": "Expanding Your Vocabulary",
+    "activities": [
+        {
+            "id": "advanced_vocab",
+            "title": "Advanced Vocabulary Quiz",
+            "description": "Challenge yourself with new words.",
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "What does 'benevolent' mean?",
+                    "options": ["Evil", "Kind", "Lazy", "Angry"],
+                    "answer": "Kind"
+                },
+                {
+                    "id": 2,
+                    "question": "What is a synonym for 'elaborate'?",
+                    "options": ["Simple", "Complicated", "Tiny", "Dull"],
+                    "answer": "Complicated"
+                }
+            ]
+        },
+        {
+            "id": "synonyms_antonyms",
+            "title": "Synonyms and Antonyms",
+            "description": "Improve your vocabulary by learning synonyms and antonyms.",
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "What is an antonym of 'happy'?",
+                    "options": ["Joyful", "Excited", "Sad", "Content"],
+                    "answer": "Sad"
+                },
+                {
+                    "id": 2,
+                    "question": "Choose a synonym for 'big'.",
+                    "options": ["Tiny", "Huge", "Weak", "Small"],
+                    "answer": "Huge"
+                }
+            ]
+        }
+    ]
+}

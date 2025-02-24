@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillBridge - Learning Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/platform.css">
+    <script defer src="assets/js/platform.js"></script> 
+</head>
+<body>
+
+    <!-- ============================= -->
+    <!-- 1️⃣ Menú Lateral (Sidebar) -->
+    <!-- ============================= -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/images/logo4.png" alt="SkillBridge Logo" class="logo">
+        </div>
+        <nav class="menu">
+            <a href="#" class="menu-item" onclick="loadModule(1)">Module 1</a>
+            <a href="#" class="menu-item" onclick="loadModule(2)">Module 2</a>
+            <a href="#" class="menu-item" onclick="loadModule(2)">Module 3</a>
+            <a href="#" class="menu-item" onclick="loadModule(2)">Module 4</a>
+            <a href="#" class="menu-item" onclick="loadModule(2)">Module 5</a>
+
+        </nav>
+        <footer class="sidebar-footer">
+            <a href="index.html" class="logout-button">Log Out</a>
+        </footer>
+    </aside>
+
+    <!-- ============================= -->
+    <!-- 2️⃣ Contenido Principal -->
+    <!-- ============================= -->
+    <main class="main-content">
+        
+        <!-- 🔹 Barra Superior con el Usuario -->
+        <header class="navbar">
+            <div class="user-info">
+                <p>Hello, <span>John Doe</span></p>
+            </div>
+        </header>
+
+        <!-- 🔹 Sección de Progreso -->
+        <section class="progress-section">
+            <h2>General Progress</h2>
+            <div class="progress-bar-container">
+                <div class="progress-bar" style="width: 45%;"></div>
+            </div>
+            <p>45% Completed</p>
+        </section>
+
+        <!-- 🔹 Sección de Módulo Activo -->
+        <section class="module-content">
+            <h2 id="module-title">Select a module</h2>
+            <p id="module-description">Click on a module from the left menu to see its activities.</p>
+        </section>
+
+        <section class="activities">
+            <h2>Activities</h2>
+            <div class="activity-grid" id="activity-grid">
+                <!-- Las actividades del módulo seleccionado se cargarán aquí -->
+            </div>
+        </section>
+    
+        <section id="activity-content">
+            <!-- Aquí se cargará la actividad cuando se haga clic en "Responder" -->
+        </section>
+
+        <!-- Additional Section -->
+        <section class="additional-section">
+            <h2>Recursos Adicionales</h2>
+            <div class="resource-list">
+                <div class="resource-item">
+                    <a href="#">Glosario de vocabulario</a>
+                </div>
+                <div class="resource-item">
+                    <a href="#">Reglas de gramática</a>
+                </div>
+                <div class="resource-item">
+                    <a href="#">Consejos para el listening</a>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

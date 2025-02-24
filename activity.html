@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillBridge - Activity</title>
+    <link rel="stylesheet" href="assets/css/platform.css">
+    <script defer src="assets/js/activity.js"></script>
+</head>
+<body>
+    <!-- ============================= -->
+    <!-- 1️⃣ Menú Lateral (Sidebar) -->
+    <!-- ============================= -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/images/logo4.png" alt="SkillBridge Logo" class="logo">
+        </div>
+        <nav class="menu">
+            <a href="#" class="menu-item" onclick="loadModule(1)">Module 1</a>
+            <a href="#" class="menu-item" onclick="loadModule(2)">Module 2</a>
+            <a href="#" class="menu-item" onclick="loadModule(2)">Module 3</a>
+            <a href="#" class="menu-item" onclick="loadModule(2)">Module 4</a>
+            <a href="#" class="menu-item" onclick="loadModule(2)">Module 5</a>
+
+        </nav>
+        <footer class="sidebar-footer">
+            <a href="index.html" class="logout-button">Log Out</a>
+        </footer>
+    </aside>
+
+    <!-- ============================= -->
+    <!-- 2️⃣ Contenido Principal -->
+    <!-- ============================= -->
+    <main class="main-content">
+        
+        <!-- 🔹 Barra Superior con el Usuario -->
+        <header class="navbar">
+            <div class="user-info">
+                <p>Hello, <span>John Doe</span></p>
+            </div>
+        </header>
+
+        <!-- 🔹 Sección de Progreso -->
+        <section class="progress-section">
+            <h2>General Progress</h2>
+            <div class="progress-bar-container">
+                <div class="progress-bar" style="width: 45%;"></div>
+            </div>
+            <p>45% Completed</p>
+        </section>
+
+        <!-- 🔹 Sección de la Actividad -->
+        <section class="activity-container">
+            <h2 id="activity-title">Loading...</h2>
+            <p id="activity-description"></p>
+            <div id="question-container"></div>
+            <div class="activity-buttons">
+                <button id="next-question">Next Question</button>
+                <button id="finish-activity">Finish & Return</button>
+            </div>
+        </section>
+
+    </main>
+</body>
+</html>
