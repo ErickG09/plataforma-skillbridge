@@ -1,9 +1,5 @@
-/* ===================================== */
-/* 🎨 SKILLBRIDGE - ESTILOS PRINCIPALES */
-/* ===================================== */
-
 /* ============================= */
-/* 1️⃣ RESET Y ESTILOS GLOBALES */
+/* ESTILOS GLOBALES */
 /* ============================= */
 * {
     margin: 0;
@@ -21,35 +17,50 @@ body {
 }
 
 /* ============================= */
-/* 2️⃣ MENÚ LATERAL (SIDEBAR) */
+/* MENÚ LATERAL */
 /* ============================= */
 .sidebar {
     width: 280px;
-    background-color: #1e2a47;
+    background: linear-gradient(135deg, #1e2a47, #2b3a67);
     color: white;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 1.5rem;
-    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 3px 0 15px rgba(0, 0, 0, 0.15);
+    align-items: center;
 }
 
 .sidebar-header {
     text-align: center;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    width: 100%;
+    margin-bottom: 1rem;
 }
 
 .sidebar-header .logo {
     width: 80%;
-    margin-top: 10px;
+    display: block;
+    margin: 0 auto;
+}
+
+.menu-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    text-align: center;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 0.5rem;
+    width: 100%;
 }
 
 .menu {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding-top: 1rem;
+    width: 100%;
+    align-items: center;
 }
 
 .menu-item {
@@ -58,47 +69,171 @@ body {
     font-size: 1rem;
     padding: 0.8rem 1rem;
     border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.2s;
+    transition: background 0.3s ease, transform 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    width: 80%;
+    justify-content: center;
+}
+
+.menu-item i {
+    font-size: 1.2rem;
 }
 
 .menu-item:hover, .menu-item.active {
-    background-color: #3a4b78;
+    background: rgba(255, 255, 255, 0.2);
     transform: scale(1.05);
 }
 
 .sidebar-footer {
     text-align: center;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.help-link {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 0.8rem;
+    padding: 0.6rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 60%;
+    margin: 0 auto 1rem auto;
+    transition: background 0.3s ease, transform 0.2s;
+}
+
+.help-link i {
+    font-size: 1rem;
+}
+
+.help-link:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
 }
 
 .logout-button {
-    background-color: #e74c3c;
+    background: #e74c3c;
     color: white;
     padding: 0.75rem 1.2rem;
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
-    display: inline-block;
-    transition: background-color 0.3s ease, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 80%;
+    margin: 0 auto;
+    transition: background 0.3s ease, transform 0.2s;
+}
+
+.logout-button i {
+    font-size: 1rem;
 }
 
 .logout-button:hover {
-    background-color: #c0392b;
+    background: #c0392b;
     transform: scale(1.05);
 }
 
+
 /* ============================= */
-/* 🎨 CONTENIDO PRINCIPAL */
+/* MENÚ HAMBURGUESA (MOBILE) */
+/* ============================= */
+
+.menu-toggle {
+    display: none;
+    background: #1e2a47;
+    border: none;
+    font-size: 1.5rem; /* 🔹 Tamaño más compacto */
+    cursor: pointer;
+    position: fixed;
+    top: 21px; /* 🔹 Ajustado para que se alinee bien */
+    left: 20px;
+    z-index: 3000;
+    color: white;
+    padding: 8px 10px; /* 🔹 Tamaño más equilibrado */
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* 🔹 Efecto hover */
+.menu-toggle:hover {
+    background-color: #2b3a67;
+    transform: scale(1.05);
+}
+
+.close-menu {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem; /* 🔹 Tamaño igual al del menú */
+    cursor: pointer;
+    position: fixed; /* 🔹 Lo hacemos fijo para que reemplace al menú */
+    top: 12px;
+    left: 3px;
+    z-index: 3100; /* 🔹 Más alto que el sidebar */
+    padding: 8px 10px;
+    border-radius: 6px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* 🔹 Efecto hover */
+.close-menu:hover {
+    transform: scale(1.09);
+}
+
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        position: fixed;
+        z-index: 2000;
+        height: 100%;
+        width: 250px;
+        background: linear-gradient(135deg, #1e2a47, #2b3a67);
+        box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* 🔹 Muestra el sidebar cuando está activo */
+    .sidebar.show {
+        transform: translateX(0);
+    }
+
+    /* 🔹 Muestra el botón de menú en móvil */
+    .menu-toggle {
+        display: block;
+    }
+
+    /* 🔹 Muestra el botón de cerrar (`✖`) cuando el menú está abierto */
+    .sidebar.show + .close-menu {
+        display: block;
+    }
+}
+
+
+/* ============================= */
+/* ==== CONTENIDO PRINCIPAL =====*/
 /* ============================= */
 .main-content {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    padding: 2rem 3rem; /* Más espacio a los lados */
+    padding: 2rem 3rem; 
 }
 
 /* ============================= */
-/* 🌟 NAVBAR SUPERIOR REFINADA */
+/* NAVBAR SUPERIOR */
 /* ============================= */
 .navbar {
     background-color: white;
@@ -124,7 +259,7 @@ body {
 }
 
 /* ============================= */
-/* 🚀 SECCIÓN DE PROGRESO MODERNA */
+/* 🚀 SECCIÓN DE PROGRESO  */
 /* ============================= */
 .progress-section {
     margin: 2rem 0;
@@ -178,99 +313,62 @@ body {
 }
 
 /* ============================= */
-/* 6️⃣ SECCIÓN DE ACTIVIDADES */
+/* 🔹 ESTILOS PARA LOS TÍTULOS */
 /* ============================= */
-.activities {
-    margin-bottom: 2rem;
+.activity-container {
+    text-align: center; /* Centra el contenido */
+    margin-bottom: 20px;
 }
 
-.activity-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
+#activity-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
 }
 
-.activity-card {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
+#activity-description {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 20px;
 }
 
-.activity-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-}
-
-.activity-card h3 {
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
-}
-
-.activity-card p {
-    margin-bottom: 1.2rem;
-    font-size: 1rem;
-}
-
-.activity-button {
-    background-color: #28a745;
-    color: white;
-    padding: 0.8rem 1.5rem;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-}
-
-.activity-button:hover {
-    background-color: #218838;
-}
 
 /* ============================= */
-/* 7️⃣ SECCIÓN DE RECURSOS ADICIONALES */
-/* ============================= */
-/* ============================= */
-/* 🌟 SECCIÓN DE RECURSOS ADICIONALES */
+/* SECCIÓN DE RECURSOS ADICIONALES */
 /* ============================= */
 .additional-section {
     background-color: white;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-top: 2rem;
+    opacity: 0.8; /* 🔹 Hace que sea menos prominente */
 }
 
-/* ✅ Mantenemos el título sin cambios */
+/* 🔹 Reducimos el tamaño del título */
 .additional-section h2 {
-    margin-bottom: 1.5rem;
-    font-size: 1.8rem;
-    color: #222;
-    font-weight: 700;
+    font-size: 1.2rem;
+    color: #555;
     text-align: left;
 }
 
-/* 📌 Estructura en Tarjetas Mejoradas */
+/* 📌 Mejor diseño para los enlaces de recursos */
 .resource-list {
     display: flex;
     gap: 1rem;
-    justify-content: space-between; /* Mejor alineación */
-    padding: 0;
-    list-style: none;
-    flex-wrap: wrap; /* Permite que se ajusten si no caben */
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-/* 💡 Tarjetas con mejor diseño */
 .resource-item {
     background: #ffffff;
-    padding: 1.2rem 1.5rem;
-    border-radius: 10px;
+    padding: 1rem;
+    border-radius: 8px;
     text-align: center;
-    min-width: 220px;
+    min-width: 200px;
     flex: 1;
-    max-width: 300px;
+    max-width: 280px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
@@ -278,185 +376,460 @@ body {
     justify-content: center;
 }
 
+/* 📌 Eliminamos el subrayado en hover y agregamos un ligero efecto de escala */
+.resource-item a {
+    color: #0056b3;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
 .resource-item:hover {
     transform: translateY(-3px);
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* 🎨 Estilos del enlace para que se vea elegante */
-.resource-item a {
-    color: #0056b3;
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
 .resource-item a:hover {
     color: #003d82;
-    text-decoration: underline;
 }
 
 
 /* ============================= */
-/* 8️⃣ RESPONSIVIDAD */
+/* 🔹 SECCIÓN DE ACTIVIDADES (IMAGEN 1) */
 /* ============================= */
-@media (max-width: 900px) {
-    .sidebar {
-        width: 220px;
-        padding: 1rem;
-    }
-
-    .main-content {
-        padding: 1rem;
-    }
-
-    .navbar {
-        padding: 1rem 1.5rem;
-    }
-
-    .activity-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
-
-    .resource-list {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    }
+.activity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
 }
 
-
-
-/* ============================= */
-/* 🎯 NUEVO DISEÑO DE ACTIVIDADES - A ANCHO COMPLETO */
-/* ============================= */
-.activity-container {
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 2rem 0;
+.activity-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
-/* 🎯 Título de la actividad */
-.activity-container h2 {
-    font-size: 2rem;
+.activity-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.15);
+}
+
+.activity-card h3 {
+    font-size: 1.6rem;
     font-weight: bold;
-    color: #222;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
+    margin-bottom: 0.7rem;
 }
 
-/* 📌 Descripción de la actividad */
-.activity-container p {
-    font-size: 1.2rem;
+.activity-card p {
+    font-size: 1.1rem;
     color: #555;
-    margin-bottom: 2rem;
-    font-weight: 500;
+    margin-bottom: 1.5rem;
 }
 
-/* 🔹 Pregunta sin tarjeta, ocupa todo el ancho */
-#question-container {
-    width: 100%;
-    padding: 1rem;
+/* 🔹 BOTÓN "START ACTIVITY" */
+.activity-card button {
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+.activity-card button:hover {
+    background: linear-gradient(135deg, #0056b3, #003f80);
+    box-shadow: 0 6px 14px rgba(0, 123, 255, 0.5);
+    transform: scale(1.05);
+}
+
+/* ============================= */
+/* 🔹 SECCIÓN DE EJERCICIOS (IMAGEN 2) */
+/* ============================= */
+/* Contenedor principal de los ejercicios */
+.exercise-container {
+    background: none !important; /* Elimina el fondo */
+    box-shadow: none !important; /* Elimina la sombra */
+    padding: 0 !important; /* Elimina el espacio alrededor */
+    border-radius: 0 !important; /* Elimina bordes redondeados */
+}
+
+
+.exercise-card {
+    background-color: white;
+    padding: 1.8rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px; /* 🔹 Espacio entre tarjetas */
+}
+
+
+.exercise-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.15);
+}
+
+.exercise-card h3 {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #222;
-    text-align: left;
-    background-color: transparent; /* Sin fondo */
-    border-bottom: 4px solid #007bff; /* Línea inferior azul */
-    margin-bottom: 1rem;
+    margin-bottom: 0.6rem;
 }
 
-/* 🔹 Opciones con diseño minimalista y elegante */
-.option-button {
-    display: block;
-    width: 100%;
-    padding: 1rem;
-    font-size: 1.2rem;
-    font-weight: 600;
+.exercise-card p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 1.4rem;
+}
+
+.exercise-card button {
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
     border: none;
+    background: linear-gradient(135deg, #28a745, #1e7e34);
+    color: white;
     cursor: pointer;
-    text-align: left;
-    padding-left: 1.5rem;
     transition: all 0.3s ease;
-    background-color: #f9f9f9;
-    border-bottom: 2px solid #ddd;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
 }
 
-.option-button:hover {
-    background-color: #eef6ff;
-    border-color: #007bff;
+.exercise-card button:hover {
+    background: linear-gradient(135deg, #1e7e34, #155d27);
+    box-shadow: 0 6px 14px rgba(40, 167, 69, 0.5);
+    transform: scale(1.05);
 }
 
-.option-button.correct {
-    background-color: #28a745 !important;
-    color: white;
+/* ============================= */
+/* 🔹 SECCIÓN DE PREGUNTAS (FORMATO VERTICAL) */
+/* ============================= */
+#question-container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 25px;
 }
 
-.option-button.incorrect {
-    background-color: #dc3545 !important;
-    color: white;
+/* 📌 Cada pregunta en su propia tarjeta */
+.question-block {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    text-align: left; /* Alinea el texto a la izquierda */
 }
 
-/* 🔹 Botones de Navegación con Mejor Diseño */
-.activity-buttons {
+/* 📌 Efecto hover */
+.question-block:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* 📌 Estilo para el texto de la pregunta */
+.question-text {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* 📌 Contenedor de opciones en formato vertical */
+.options {
     display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
-    gap: 1rem;
+    flex-direction: column; /* 🔹 Muestra las respuestas de manera vertical */
+    gap: 10px;
+    align-items: flex-start;
 }
 
-#next-question,
-#finish-activity {
-    flex: 1;
-    background-color: #007bff;
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 6px;
+/* 📌 Botones de opción mejorados */
+.option-button {
+    padding: 12px 18px;
     font-size: 1.2rem;
     font-weight: bold;
+    border-radius: 8px;
+    border: 2px solid #007bff;
+    background: white;
+    color: #007bff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0, 123, 255, 0.2);
+    width: 100%; /* 🔹 Hace que las opciones ocupen todo el ancho */
+    text-align: left; /* 🔹 Alinea el texto dentro del botón */
+}
+
+/* 📌 Efecto hover */
+.option-button:hover {
+    background: #007bff;
+    color: white;
+    transform: scale(1.03);
+}
+
+/* 📌 Cuando una opción está seleccionada */
+.option-button.selected {
+    background: #28a745;
+    border-color: #28a745;
+    color: white;
+}
+
+/* ============================= */
+/* 🔹 BOTONES FINALES */
+/* ============================= */
+.activity-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* Botón de Check Answers */
+#check-answers {
+    background: linear-gradient(135deg, #ff9800, #e68900);
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(255, 152, 0, 0.3);
 }
 
-#next-question:hover {
-    background-color: #0056b3;
+#check-answers:hover {
+    background: linear-gradient(135deg, #e68900, #c76e00);
+    transform: scale(1.05);
 }
 
+/* Botón de Finish & Return */
 #finish-activity {
-    background-color: #dc3545;
+    background: linear-gradient(135deg, #28a745, #1e7e34);
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
 }
 
 #finish-activity:hover {
-    background-color: #c82333;
+    background: linear-gradient(135deg, #1e7e34, #155d27);
+    transform: scale(1.05);
 }
 
-/* ============================= */
-/* ✅ RESPONSIVIDAD */
-/* ============================= */
+/* 📌 Responsive para pantallas más pequeñas */
 @media (max-width: 768px) {
-    .activity-container {
-        width: 100%;
-        padding: 1rem;
+    #activity-title {
+        font-size: 1.8rem;
     }
 
-    #question-container {
-        font-size: 1.3rem;
+    #activity-description {
+        font-size: 1.1rem;
+    }
+
+    .question-block {
+        padding: 16px;
     }
 
     .option-button {
         font-size: 1.1rem;
-        padding: 0.8rem;
+        padding: 12px 18px;
     }
 
     .activity-buttons {
         flex-direction: column;
+        align-items: center;
     }
 
-    #next-question, #finish-activity {
-        font-size: 1rem;
-        padding: 0.8rem 1.5rem;
+    #check-answers, #finish-activity {
+        width: 80%;
+        text-align: center;
     }
+}
+
+.score-container {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* ✅ Estilo del Score */
+#score-display {
+    padding: 1rem 2rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 10px;
+    background: #f8f9fa;
+    border: 2px solid #007bff;
+    color: #007bff;
+    display: inline-block;
+    box-shadow: 0 3px 8px rgba(0, 123, 255, 0.2);
+}
+
+.next-button {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.next-button:hover {
+    background: linear-gradient(135deg, #0056b3, #003f80);
+    transform: scale(1.05);
+}
+
+/* 🔹 Usuario */
+.user-info {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.user-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+}
+
+#user-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+#user-role {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+/* 🔹 Progreso */
+.progress-container {
+    text-align: center;
+    margin: 15px 0;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.progress-bar {
+    width: 80%;
+    height: 8px;
+    background: #ccc;
+    border-radius: 4px;
+    margin: 5px auto;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #28a745;
+    width: 50%;
+    transition: width 0.3s ease-in-out;
+}
+
+/* 🔹 Noticias */
+.news-section {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    margin: 15px;
+}
+
+.news-section h3 {
+    font-size: 1rem;
+    color: white;
+}
+
+.news-section p {
+    font-size: 0.9rem;
+    color: #ddd;
+}
+
+.news-section a {
+    color: #ffeb3b;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.highlighted-word {
+    font-weight: bold;
+    color: #ff6600; /* Cambia este color a lo que prefieras */
+    background-color: rgba(255, 165, 0, 0.2); /* Fondo sutil para resaltar */
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+
+.back-button {
+    background-color: #f44336; /* Rojo */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.back-button:hover {
+    background-color: #d32f2f;
+}
+
+/* 🔹 Resaltar módulo activo en el menú */
+.menu-item.active {
+    background: rgba(255, 255, 255, 0.3);
+    font-weight: bold;
+    border-left: 4px solid #ff9800;
+}
+
+/* 🔹 Mensaje cuando no hay actividad seleccionada */
+.empty-message {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-top: 1rem;
+}
+
+/* 🔹 Ocultar elementos hasta que se carguen dinámicamente */
+.hidden {
+    display: none;
+}
+
+/* 🔹 Loader animado */
+.loader {
+    display: none;
+    margin: 2rem auto;
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ddd;
+    border-top: 5px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

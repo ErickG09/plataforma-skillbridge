@@ -1,65 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>SkillBridge - Activity</title>
-    <link rel="stylesheet" href="assets/css/platform.css">
-    <script defer src="assets/js/activity.js"></script>
+    <link rel="icon" href="assets/images/logo1.png" type="image/png" />
+    <link rel="stylesheet" href="assets/css/platform.css" />
+    
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <script type="module" src="assets/js/activity.js"></script>
+    <script defer src="assets/js/menu.js"></script>
 </head>
 <body>
-    <!-- ============================= -->
-    <!-- 1️⃣ Menú Lateral (Sidebar) -->
-    <!-- ============================= -->
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <img src="assets/images/logo4.png" alt="SkillBridge Logo" class="logo">
-        </div>
-        <nav class="menu">
-            <a href="#" class="menu-item" onclick="loadModule(1)">Module 1</a>
-            <a href="#" class="menu-item" onclick="loadModule(2)">Module 2</a>
-            <a href="#" class="menu-item" onclick="loadModule(2)">Module 3</a>
-            <a href="#" class="menu-item" onclick="loadModule(2)">Module 4</a>
-            <a href="#" class="menu-item" onclick="loadModule(2)">Module 5</a>
 
+    <!-- 🔹 Menú de hamburguesa (solo en móviles) -->
+    <button class="menu-toggle" id="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- 🔹 Menú Lateral -->
+    <!-- <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/images/logo4.png" alt="SkillBridge Logo" class="logo" />
+            <button class="close-menu" id="close-menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+
+        <nav class="menu">
+            <a href="platform.html" class="menu-item"><i class="fas fa-arrow-left"></i> Return to Platform</a>
         </nav>
+
         <footer class="sidebar-footer">
-            <a href="index.html" class="logout-button">Log Out</a>
+            <a href="#" class="help-link"><i class="fas fa-question-circle"></i> Help & Support</a>
+            <a href="index.html" class="logout-button"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+        </footer>
+    </aside> -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/images/logo4.png" alt="SkillBridge Logo" class="logo" />
+            <button class="close-menu" id="close-menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    
+        <!-- <div class="progress-container">
+            <p>Progress</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill" style="width: 50%;"></div>
+            </div>
+            <span id="progress-text"></span>
+        </div> -->
+    
+        <nav class="menu">
+            <a href="platform.html" class="menu-item"><i class="fas fa-arrow-left"></i> Return to Platform</a>
+        </nav>
+    
+        <!-- <div class="news-section">
+            <h3>📢 Announcements</h3>
+            <p>New exercises have been added to Grammar module!</p>
+            <a href="#">Read More</a>
+        </div> -->
+    
+        <footer class="sidebar-footer">
+            <a href="support.html" class="help-link"><i class="fas fa-question-circle"></i> Help & Support</a>
+            <a href="index.html" class="logout-button"><i class="fas fa-sign-out-alt"></i> Log Out</a>
         </footer>
     </aside>
+    
 
-    <!-- ============================= -->
-    <!-- 2️⃣ Contenido Principal -->
-    <!-- ============================= -->
+
+    <!-- 🔹 Contenido Principal -->
     <main class="main-content">
-        
-        <!-- 🔹 Barra Superior con el Usuario -->
         <header class="navbar">
             <div class="user-info">
-                <p>Hello, <span>John Doe</span></p>
+                <p><span id="user-name"></span></p>
             </div>
         </header>
+        
 
-        <!-- 🔹 Sección de Progreso -->
-        <section class="progress-section">
+        <!-- <section class="progress-section">
             <h2>General Progress</h2>
             <div class="progress-bar-container">
-                <div class="progress-bar" style="width: 45%;"></div>
+                <div class="progress-bar" id="progress-bar" style="width: 0%;"></div>
             </div>
-            <p>45% Completed</p>
-        </section>
+            <p id="progress-text">0% Completed</p>
+        </section> -->
 
-        <!-- 🔹 Sección de la Actividad -->
         <section class="activity-container">
-            <h2 id="activity-title">Loading...</h2>
+            <!-- <h2 id="activity-title">Loading...</h2> -->
             <p id="activity-description"></p>
+
             <div id="question-container"></div>
-            <div class="activity-buttons">
-                <button id="next-question">Next Question</button>
-                <button id="finish-activity">Finish & Return</button>
-            </div>
         </section>
 
+        <!-- 🔹 Botones (Afuera de la tarjeta) -->
+        <!-- <div class="activity-buttons">
+            <button id="check-answers" onclick="checkAnswers()">Check Answers</button>
+            <button id="finish-activity">Finish & Return</button>
+        </div> -->
     </main>
+
 </body>
 </html>

@@ -1,0 +1,133 @@
+{
+    "title": "Basic Language Exercises",
+    "description": "Simple exercises for testing the platform.",
+    "totalExercises": 3,
+    "exercises": [
+        {
+            "id": "exercise1",
+            "title": "Exercise 1 - Choosing the correct word",
+            "description": "Select the correct word to complete each sentence.",
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "She _____ to school every morning.",
+                    "options": ["go", "goes", "going", "gone"],
+                    "correctAnswer": "goes",
+                    "underlinedWords": []
+                },
+                {
+                    "id": 2,
+                    "question": "I _____ a delicious pizza yesterday.",
+                    "options": ["eat", "ate", "eaten", "eating"],
+                    "correctAnswer": "ate",
+                    "underlinedWords": []
+                }
+            ]
+        },
+        {
+            "id": "exercise2",
+            "title": "Exercise 2 - Identifying nouns",
+            "description": "Identify the noun in each sentence.",
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "The dog is playing in the park.",
+                    "options": ["dog", "is", "playing", "in"],
+                    "correctAnswer": "dog",
+                    "underlinedWords": ["dog"]
+                },
+                {
+                    "id": 2,
+                    "question": "Sarah loves reading books at night.",
+                    "options": ["Sarah", "loves", "reading", "at"],
+                    "correctAnswer": "Sarah",
+                    "underlinedWords": ["Sarah"]
+                }
+            ]
+        },
+        {
+            "id": "exercise3",
+            "title": "Exercise 3 - Completing sentences",
+            "description": "Fill in the blanks with the correct word.",
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "It is very _____ today. I need a jacket.",
+                    "options": ["hot", "cold", "big", "small"],
+                    "correctAnswer": "cold",
+                    "underlinedWords": []
+                },
+                {
+                    "id": 2,
+                    "question": "My brother is very _____ at math.",
+                    "options": ["tall", "funny", "good", "slow"],
+                    "correctAnswer": "good",
+                    "underlinedWords": []
+                }
+            ]
+        },
+        {
+            "id": "exercise4",
+            "title": "Exercise 3 - Completing sentences",
+            "description": "Fill in the blanks with the correct word.",
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "It is very _____ today. I need a jacket.",
+                    "options": ["hot", "cold", "big", "small"],
+                    "correctAnswer": "cold",
+                    "underlinedWords": []
+                },
+                {
+                    "id": 2,
+                    "question": "My brother is very _____ at math.",
+                    "options": ["tall", "funny", "good", "slow"],
+                    "correctAnswer": "good",
+                    "underlinedWords": []
+                }
+            ]
+        },
+        {
+            "id": "exercise5",
+            "title": "Exercise 3 - Completing sentences",
+            "description": "Fill in the blanks with the correct word.",
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "It is very _____ today. I need a jacket.",
+                    "options": ["hot", "cold", "big", "small"],
+                    "correctAnswer": "cold",
+                    "underlinedWords": []
+                },
+                {
+                    "id": 2,
+                    "question": "My brother is very _____ at math.",
+                    "options": ["tall", "funny", "good", "slow"],
+                    "correctAnswer": "good",
+                    "underlinedWords": []
+                }
+            ]
+        },
+        {
+            "id": "exercise6",
+            "title": "Exercise 3 - Completing sentences",
+            "description": "Fill in the blanks with the correct word.",
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "It is very _____ today. I need a jacket.",
+                    "options": ["hot", "cold", "big", "small"],
+                    "correctAnswer": "cold",
+                    "underlinedWords": []
+                },
+                {
+                    "id": 2,
+                    "question": "My brother is very _____ at math.",
+                    "options": ["tall", "funny", "good", "slow"],
+                    "correctAnswer": "good",
+                    "underlinedWords": []
+                }
+            ]
+        }
+    ]
+}

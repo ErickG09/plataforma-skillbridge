@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SkillBridge - Activities</title>
+    <link rel="icon" href="assets/images/logo1.png" type="image/png" />
+    <link rel="stylesheet" href="assets/css/platform.css" />
+    
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <script type="module" src="assets/js/activities.js"></script>
+    <script defer src="assets/js/menu.js"></script>
+</head>
+<body>
+
+    <!-- 🔹 Menú de hamburguesa (solo en móviles) -->
+    <button class="menu-toggle" id="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- 🔹 Menú Lateral -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/images/logo4.png" alt="SkillBridge Logo" class="logo" />
+
+            <h3 class="menu-title">Learning Modules</h3>
+            <nav class="menu" id="modules-menu">
+                <!-- Los módulos se cargarán dinámicamente -->
+            </nav>
+
+            <button class="close-menu" id="close-menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <nav class="menu">
+            <a href="platform.html" class="menu-item"><i class="fas fa-arrow-left"></i> Return to Platform</a>
+        </nav>
+
+        <footer class="sidebar-footer">
+            <a href="support.html" class="help-link"><i class="fas fa-question-circle"></i> Help & Support</a>
+            <a href="index.html" class="logout-button"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+        </footer>
+    </aside>
+
+    <!-- 🔹 Contenido Principal -->
+    <main class="main-content">
+        <header class="navbar">
+            <div class="user-info">
+                <p><span id="user-name"></span></p>
+            </div>
+        </header><br>
+
+        <section class="module-content">
+            <h2 id="module-title">Module Activities</h2>
+            <p id="module-description"></p>
+        </section>
+
+        <section class="activities">
+            <div class="activity-grid" id="activity-grid">
+                <p>Loading activities...</p>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

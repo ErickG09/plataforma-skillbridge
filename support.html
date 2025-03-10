@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support - SkillBridge</title>
+    <link rel="stylesheet" href="assets/css/support.css">
+    <script defer src="assets/js/menu.js"></script>
+</head>
+<body>
+
+    <!-- 🔹 Menú Lateral -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/images/logo4.png" alt="SkillBridge Logo" class="logo">
+            <h3 class="menu-title">Support Center</h3>
+        </div>
+
+        <nav class="menu">
+            <a href="platform.html" class="menu-item"><i class="fas fa-home"></i> Home</a>
+            <a href="help.html" class="menu-item active"><i class="fas fa-question-circle"></i> Help & Support</a>
+            <a href="index.html" class="logout-button"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+        </nav>
+    </aside>
+
+    <!-- 🔹 Contenido Principal -->
+    <main class="main-content">
+        <header class="navbar">
+            <div class="user-info">
+                <p><span id="user-name"></span></p>
+            </div>
+        </header>
+
+        <section class="help-container">
+            <h2>Help & Support</h2>
+            <p>If you need assistance, check the FAQ below or contact us.</p>
+
+            <!-- 🔹 Preguntas Frecuentes (FAQ) -->
+            <div class="faq-section">
+                <h3>Frequently Asked Questions</h3>
+                <div class="faq-item">
+                    <button class="faq-question">How do I reset my password?</button>
+                    <div class="faq-answer">
+                        <p>Go to the login page, click on "Forgot password?" and follow the instructions.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Where can I see my progress?</button>
+                    <div class="faq-answer">
+                        <p>Your progress is displayed on the dashboard in the "General Progress" section.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">How do I contact support?</button>
+                    <div class="faq-answer">
+                        <p>You can reach out via email at <a href="mailto:support@skillbridge.com">support@skillbridge.com</a>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🔹 Contacto -->
+            <div class="contact-section">
+                <h3>Contact Us</h3>
+                <p>If you need further help, feel free to send us a message.</p>
+                <form class="contact-form">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" required>
+
+                    <label for="message">Message:</label>
+                    <textarea id="message" rows="4" required></textarea>
+
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/js/help.js"></script>
+
+</body>
+</html>

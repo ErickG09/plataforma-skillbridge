@@ -1,0 +1,176 @@
+{
+    "title": "Class Exercises - Activity 1",
+    "description": "Practice exercises for the first module.",
+    "totalExercises": 3,
+    "exercises": [
+      {
+        "id": "exercise1",
+        "title": "Exercise 1 - Identifying the need for articles",
+        "description": "Write the correct article ('a', 'an', or 'the'). If no article is needed, write 'nothing'.",
+        "questions": [
+          {
+            "id": 1,
+            "question": "The old woman made a special tea with _____ herb that smelled of oranges.",
+            "options": ["a", "an", "the", "nothing"],
+            "correctAnswer": "an",
+            "underlinedWords": []
+          },
+          {
+            "id": 2,
+            "question": "Through his telescope we could see what looked like canals on _____ Mars.",
+            "options": ["a", "an", "the", "nothing"],
+            "correctAnswer": "nothing",
+            "underlinedWords": []
+          },
+          {
+            "id": 3,
+            "question": "The children were released from _____ school early last Friday because of a teachers’ conference.",
+            "options": ["a", "an", "the", "nothing"],
+            "correctAnswer": "nothing",
+            "underlinedWords": []
+          },
+          {
+            "id": 4,
+            "question": "Robin Hood supposedly stole from _____ rich.",
+            "options": ["a", "an", "the", "nothing"],
+            "correctAnswer": "the",
+            "underlinedWords": []
+          },
+          {
+            "id": 5,
+            "question": "_____ untold number of people perished while attempting to cross Death Valley.",
+            "options": ["a", "an", "the", "nothing"],
+            "correctAnswer": "an",
+            "underlinedWords": []
+          },
+          {
+            "id": 6,
+            "question": "Albert is _____ only actor that I know personally.",
+            "options": ["a", "an", "the", "nothing"],
+            "correctAnswer": "the",
+            "underlinedWords": []
+
+          }
+        ]
+      },
+      {
+        "id": "exercise2",
+        "title": "Exercise 2 - Checking articles",
+        "description": "If the underlined article is used incorrectly, cross it out and choose the correct item.",
+        "questions": [
+            {
+                "id": 1,
+                "question": "Countless tourists will be thronging to the Greek islands.",
+                "options": ["a", "an", "the", "nothing"],
+                "correctAnswer": "nothing",
+                "underlinedWords": []
+            },
+            {
+                "id": 2,
+                "question": "The tomato originated in Central America.",
+                "options": ["a", "an", "the", "nothing"],
+                "correctAnswer": "nothing",
+                "underlinedWords": []
+            },
+            {
+                "id": 3,
+                "question": "The steam engine was developed in an eighteenth century.",
+                "options": ["a", "an", "the", "nothing"],
+                "correctAnswer": "a",
+                "underlinedWords": []
+            },
+            {
+                "id": 4,
+                "question": "A hour passed before the rescue ship arrived.",
+                "options": ["a", "an", "the", "nothing"],
+                "correctAnswer": "an",
+                "underlinedWords": []
+            },
+            {
+                "id": 5,
+                "question": "The Russia has a very diverse culture.",
+                "options": ["a", "an", "the", "nothing"],
+                "correctAnswer": "nothing",
+                "underlinedWords": []
+            },
+            {
+                "id": 6,
+                "question": "A university education is one of the requirements for the position.",
+                "options": ["a", "an", "the", "nothing"],
+                "correctAnswer": "a",
+                "underlinedWords": []
+            },
+            {
+                "id": 7,
+                "question": "The doctor refrained from giving him an advice.",
+                "options": ["a", "an", "the", "nothing"],
+                "correctAnswer": "nothing",
+                "underlinedWords": []
+            }
+        ]
+    },
+      {
+        "id": "exercise3",
+        "title": "Exercise 3 - Checking nouns",
+        "description": "Look at the underlined nouns in each sentence. Circle the noun that is incorrect.",
+        "questions": [
+          {
+            "id": 1,
+            "question": "During the ten years he was a politic, his policies changed drastically.",
+            "options": ["years","politic", "policies"],
+            "correctAnswer": "politic",
+            "underlinedWords": ["years","politic", "policies"]
+          },
+          {
+            "id": 2,
+            "question": "Joe insisted that his success was due to motivated rather than brilliance.",
+            "options": ["success", "motivated", "brilliance"],
+            "correctAnswer": "motivated",
+            "underlinedWords": ["success", "motivated", "brilliance"]
+          },
+          {
+            "id": 3,
+            "question": "Scientists have managed to clone that kind of protein genes, but only as an exercise in basic research.",
+            "options": ["Scientists", "genes", "exercise"],
+            "correctAnswer": "genes",
+            "underlinedWords": ["Scientists", "genes", "exercise"]
+          },
+          {
+            "id": 4,
+            "question": "The most renowned of America’s metalworker, Samuel Yellin, designed the ironwork for the New York Federal Reserve Bank.",
+            "options": ["metalworker", "ironwork", "Bank"],
+            "correctAnswer": "metalworker",
+            "underlinedWords": ["metalworker", "ironwork", "Bank"]
+          },
+          {
+            "id": 5,
+            "question": "The childrens were counting the toys and candy they had collected during the festivities.",
+            "options": ["childrens", "toys", "candy"],
+            "correctAnswer": "childrens",
+            "underlinedWords": ["childrens", "toys", "candy"]
+          },
+          {
+            "id": 6,
+            "question": "On the outskirts of the town, calf are frequently seen grazing in the meadows.",
+            "options": ["outskirts", "town", "calf", "meadows"],
+            "correctAnswer": "calf",
+            "underlinedWords": ["outskirts", "town", "calf", "meadows"]
+          },
+          {
+            "id": 7,
+            "question": "The police officer gave some advices on crime prevention at the community meeting.",
+            "options": ["officer", "advices", "prevention", "meeting"],
+            "correctAnswer": "advices",
+            "underlinedWords": ["officer", "advices", "prevention", "meeting"]
+          },
+          {
+            "id": 8,
+            "question": "One series of grammar book that was used in the experimental class was written by the students themselves.",
+            "options": ["series", "book", "class", "students"],
+            "correctAnswer": "book",
+            "underlinedWords": ["series", "book", "class", "students"]
+          }
+        ]
+      }
+    ]
+  }
