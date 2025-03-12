@@ -12,7 +12,7 @@ import {
     getDocs 
 } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js";
 
-import { app, auth, db } from "./firebase-config";
+import { app, auth, db } from "firebase-config";
 // 🔹 Configuración de Firebase
 // const firebaseConfig = {
 //     apiKey: "AIzaSyCk8QjypvD96WR2Qj1k0lmeXM-DeSsaLSw",
