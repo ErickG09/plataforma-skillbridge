@@ -54,6 +54,19 @@
         </div>
     </div>
 
+     <!-- 🔹 Agregar las variables de entorno (para Vercel) -->
+     <script>
+        window.API_KEY = "<%= process.env.API_KEY %>";
+        window.AUTH_DOMAIN = "<%= process.env.AUTH_DOMAIN %>";
+        window.PROJECT_ID = "<%= process.env.PROJECT_ID %>";
+        window.STORAGE_BUCKET = "<%= process.env.STORAGE_BUCKET %>";
+        window.MESSAGING_SENDER_ID = "<%= process.env.MESSAGING_SENDER_ID %>";
+        window.APP_ID = "<%= process.env.APP_ID %>";
+    </script>
+
+    <!-- 🔹 Importar la configuración de Firebase -->
+    <script type="module" src="assets/js/firebase-config.js"></script>
+
     <!-- Script para la autenticación -->
     <script type="module" src="assets/js/auth.js"></script>
 

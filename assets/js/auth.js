@@ -12,20 +12,21 @@ import {
     getDocs 
 } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js";
 
+import { app, auth, db } from "./firebase-config";
 // 🔹 Configuración de Firebase
-const firebaseConfig = {
-    apiKey: "AIzaSyCk8QjypvD96WR2Qj1k0lmeXM-DeSsaLSw",
-    authDomain: "bd-skillbridge-platform.firebaseapp.com",
-    projectId: "bd-skillbridge-platform",
-    storageBucket: "bd-skillbridge-platform.appspot.com",
-    messagingSenderId: "965541638734",
-    appId: "1:965541638734:web:47f9c5ef524a0940ad891f"
-};
+// const firebaseConfig = {
+//     apiKey: "AIzaSyCk8QjypvD96WR2Qj1k0lmeXM-DeSsaLSw",
+//     authDomain: "bd-skillbridge-platform.firebaseapp.com",
+//     projectId: "bd-skillbridge-platform",
+//     storageBucket: "bd-skillbridge-platform.appspot.com",
+//     messagingSenderId: "965541638734",
+//     appId: "1:965541638734:web:47f9c5ef524a0940ad891f"
+// };
 
 // 🔹 Inicializar Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+// const app = initializeApp(firebaseConfig);
+// const auth = getAuth(app);
+// const db = getFirestore(app);
 
 console.log("✅ Firebase inicializado correctamente");
 
