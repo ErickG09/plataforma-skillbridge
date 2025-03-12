@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <!-- 🔹 Menú de hamburguesa (solo en móviles) -->
+    <!-- 🔹 Menú hamburguesa (móviles) -->
     <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">
         <i class="fas fa-bars"></i>
     </button>
@@ -27,30 +27,31 @@
                 <i class="fas fa-times"></i>
             </button>
         </div>
-    
+
         <h2 class="menu-title">Learning Modules</h2>
-        
-        <nav class="menu" id="modules-menu">
-            <!-- 🔹 Módulos cargados dinámicamente -->
+
+        <nav class="menu" id="modules-container">
+            <p>📦 Loading modules...</p>
         </nav>
+        
 
         <!-- 🔹 Sección visible solo para ADMIN -->
         <div id="admin-section" class="hidden">
             <h2 class="menu-title">Admin Panel</h2>
-            <a href="#" class="menu-item">
+            <a href="ManageUsers/manage_users.html" id="manage-users-link" class="menu-item">
                 <i class="fas fa-user-cog"></i> Manage Users
             </a>
-            <a href="#" class="menu-item">
+            <a href="ManageActivities/manage_activities.html" id="manage-activities-link" class="menu-item">
                 <i class="fas fa-database"></i> Manage Activities
             </a>
         </div>
-    
+
         <div class="sidebar-footer">
             <a href="support.html" class="help-link"><i class="fas fa-question-circle"></i> Help & Support</a>
             <a href="index.html" class="logout-button" id="logout-button"><i class="fas fa-sign-out-alt"></i> Log Out</a>
         </div>
     </aside>
-    
+
     <!-- 🔹 Contenido Principal -->
     <main class="main-content">
         
@@ -69,26 +70,32 @@
             <p id="progress-text">0% Completed</p>
         </section>
 
-        <!-- 🔹 Sección de Módulo Activo -->
+        <!-- 🔹 Sección de bienvenida -->
         <section class="module-content">
             <h2 id="module-title">Welcome to the SkillBridge App</h2>
             <p id="module-description">Select a module from the left menu to start your learning journey</p>
         </section>
 
-        <!-- 🔹 Loader de Actividades -->
-        <div class="loader" id="loader"></div>
-
-        <!-- 🔹 Sección de Actividades -->
-        <section class="activities">
-            <div class="activity-grid" id="activity-grid">
-                <!-- 🔹 Actividades cargadas dinámicamente -->
-            </div>
+        <!-- 🔹 Contenedores para actividades, ejercicios y preguntas -->
+        <!-- <section class="activities-section">
+            <div id="activities-container"></div>
         </section>
-    
-        <!-- 🔹 Sección de Recursos Adicionales -->
+
+        <section class="exercises-section">
+            <div id="exercises-container"></div>
+        </section>
+
+        <section class="questions-section">
+            <div id="questions-container">
+            </div>
+        </section> -->
+
+        <!-- 🔹 Recursos Adicionales -->
         <section class="additional-section">
             <h2>Additional Resources</h2>
-            <div class="resource-list">
+            <p>Working....
+                Later this space will be available</p>
+            <!-- <div class="resource-list">
                 <div class="resource-item">
                     <a href="#">Vocabulary Glossary</a>
                 </div>
@@ -98,7 +105,7 @@
                 <div class="resource-item">
                     <a href="#">Listening Tips</a>
                 </div>
-            </div>
+            </div> -->
         </section>
     </main>
 

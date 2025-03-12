@@ -1,0 +1,248 @@
+/* =============================== */
+/* 🌟 ESTILOS PARA RECUPERACIÓN DE CONTRASEÑA */
+/* =============================== */
+
+/* Fondo general */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f4f7fc;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Contenedor de recuperación */
+.recover-container {
+    background: white;
+    max-width: 450px;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    animation: fadeIn 0.4s ease-in-out;
+    text-align: center;
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Título principal */
+.recover-container h2 {
+    font-size: 2rem;
+    color: #222;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+}
+
+/* Descripción */
+.recover-container p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+/* Grupo de formulario */
+.form-group {
+    margin-bottom: 1.8rem;
+    text-align: left;
+}
+
+/* Etiquetas */
+.form-group label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Campo de entrada */
+.form-group input {
+    width: 100%;
+    padding: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+    background-color: #f9f9f9;
+}
+
+.form-group input:focus {
+    border-color: #4caf50;
+    outline: none;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+    background-color: #fff;
+}
+
+/* Botón de recuperación */
+.recover-button {
+    width: 100%;
+    padding: 1rem;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.recover-button:hover {
+    background-color: #388e3c;
+    transform: scale(1.05);
+}
+
+/* Botón de regreso */
+.back-to-login {
+    display: block;
+    margin-top: 1rem;
+    text-decoration: none;
+    color: #4caf50;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.back-to-login:hover {
+    text-decoration: underline;
+    color: #2e7d32;
+}
+
+/* =============================== */
+/* 📱 RESPONSIVIDAD */
+/* =============================== */
+@media (max-width: 500px) {
+    .recover-container {
+        max-width: 90%;
+        padding: 2rem;
+    }
+
+    .recover-container h2 {
+        font-size: 1.8rem;
+    }
+
+    .recover-container p {
+        font-size: 0.95rem;
+    }
+
+    .recover-button {
+        font-size: 1.1rem;
+    }
+}
+
+
+/* =============================== */
+/* 🌟 ESTILOS PARA EL LOGO (ARRIBA A LA IZQUIERDA) */
+/* =============================== */
+
+.navbar {
+    position: absolute; /* Fija el logo en la parte superior */
+    top: 20px; /* Margen superior */
+    left: 30px; /* Margen izquierdo */
+    display: flex;
+    align-items: center;
+    z-index: 1000; /* Asegura que quede por encima de otros elementos */
+}
+
+/* Contenedor del logo */
+.navbar-logo a {
+    display: flex;
+    align-items: center;
+}
+
+/* Imagen del logo */
+.navbar-logo img {
+    max-width: 180px; /* Tamaño ajustado */
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease-in-out, opacity 0.3s;
+}
+
+/* Efecto hover en el logo */
+.navbar-logo img:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+/* =============================== */
+/* 📱 RESPONSIVIDAD DEL LOGO */
+/* =============================== */
+
+@media (max-width: 768px) {
+    .navbar {
+        top: 15px;
+        left: 20px;
+    }
+
+    .navbar-logo img {
+        max-width: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        top: 10px;
+        left: 15px;
+    }
+
+    .navbar-logo img {
+        max-width: 130px;
+    }
+}
+
+
+/* =============================== */
+/* 🌟 ESTILOS PARA LOS MENSAJES */
+/* =============================== */
+
+.message {
+    display: none; /* Oculto por defecto */
+    text-align: center;
+    padding: 1rem;
+    margin-top: 1.5rem; /* Asegura espacio entre el formulario y el mensaje */
+    width: 90%;
+    max-width: 450px; /* Se mantiene alineado con el formulario */
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+/* 🔴 Mensaje de error */
+.message.error {
+    background-color: #ffebee;
+    color: #c62828;
+    border-left: 5px solid #c62828;
+}
+
+/* 🟢 Mensaje de éxito */
+.message.success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border-left: 5px solid #2e7d32;
+}
+
+/* 📱 Responsividad */
+@media (max-width: 480px) {
+    .message {
+        width: 90%;
+        font-size: 0.9rem;
+    }
+}
+
+

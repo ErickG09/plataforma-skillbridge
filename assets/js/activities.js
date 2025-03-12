@@ -1,7 +1,9 @@
 // 🔹 Importar Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
+import { 
+    getFirestore, collection, doc, getDoc, getDocs
+} from "https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js";
-import { getFirestore, doc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js";
 
 // 🔹 Configuración de Firebase
 const firebaseConfig = {
@@ -15,153 +17,105 @@ const firebaseConfig = {
 
 // 🔹 Inicializar Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
-// ✅ VERIFICAR AUTENTICACIÓN ANTES DE CARGAR LA PÁGINA
-document.addEventListener("DOMContentLoaded", () => {
-    onAuthStateChanged(auth, async (user) => {
-        if (!user) {
-            console.warn("⚠️ No hay usuario autenticado. Redirigiendo a login...");
-            window.location.href = "login.html";
+// Usuario actual
+let currentUser = null;
+
+// 🔹 Obtener módulo desde la URL
+const urlParams = new URLSearchParams(window.location.search);
+const moduleId = urlParams.get("module");
+
+// 🔹 Redirigir si no hay módulo en la URL
+if (!moduleId) {
+    console.error("❌ No se encontró el módulo en la URL. Redirigiendo...");
+    window.location.href = "platform.html";
+}
+
+// 🔹 Verificar autenticación del usuario
+onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+        console.warn("⚠️ Usuario no autenticado. Redirigiendo al login...");
+        window.location.href = "index.html";
+        return;
+    }
+
+    currentUser = user;
+    console.log("✅ Usuario autenticado:", user.uid);
+
+    try {
+        // Obtener datos del usuario desde Firestore
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
+
+        if (!userSnap.exists()) {
+            console.error("❌ Usuario no encontrado en la base de datos.");
             return;
         }
 
-        console.log("✅ Usuario autenticado:", user.uid);
+        const userData = userSnap.data();
+        const userName = userData.name || "Student"; // Si no tiene nombre, usar "Student"
 
-        try {
-            // 🔹 Obtener información del usuario en Firestore
-            const userRef = doc(db, "users", user.uid);
-            const userSnap = await getDoc(userRef);
+        // 🔹 Mostrar el nombre del usuario en la interfaz con saludo
+        document.getElementById("user-name").innerText = `Hello, ${userName}`;
 
-            if (!userSnap.exists()) {
-                console.error("❌ Usuario no encontrado en Firestore");
-                return;
-            }
-
-            const userData = userSnap.data();
-            document.getElementById("user-name").innerText = `Hello, ${userData.name}`;
-
-            // 🔹 Obtener módulo seleccionado de la URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const moduleId = urlParams.get("module");
-
-            if (!moduleId) {
-                console.warn("⚠️ No se encontró módulo en la URL. Redirigiendo...");
-                window.location.href = "platform.html";
-                return;
-            }
-
-            console.log(`📥 Cargando actividades del módulo: ${moduleId}`);
-            loadActivities(moduleId);
-        } catch (error) {
-            console.error("❌ Error al obtener los datos del usuario:", error);
-        }
-    });
+        // 🔹 Cargar actividades del módulo solo después de obtener el usuario
+        await loadActivities();
+    } catch (error) {
+        console.error("❌ Error al obtener los datos del usuario:", error);
+    }
 });
 
-/**
- * ===================================================
- * FUNCIÓN: Cargar actividades del módulo seleccionado
- * ===================================================
- */
-async function loadActivities(moduleId) {
+
+//===========================================================================
+// 🔹 FUNCIÓN PARA CARGAR Y MOSTRAR ACTIVIDADES EN CARDS
+//===========================================================================
+async function loadActivities() {
     const activityGrid = document.getElementById("activity-grid");
-    if (!activityGrid) return;
-
-    activityGrid.innerHTML = "<p>Loading activities...</p>";
+    activityGrid.innerHTML = `<p class="loading-text">📦 Loading activities...</p>`;
 
     try {
-        // 🔹 Obtener actividades desde Firestore (como subcolección)
-        const activitiesRef = collection(db, "modules", moduleId, "activities");
-        const activitiesSnapshot = await getDocs(activitiesRef);
-
-        if (activitiesSnapshot.empty) {
-            console.warn("⚠️ No hay actividades para este módulo.");
-            activityGrid.innerHTML = "<p>No activities available for this module.</p>";
-            return;
-        }
-
-        activityGrid.innerHTML = ""; // Limpiar contenido antes de agregar las actividades
-
-        activitiesSnapshot.forEach((activityDoc) => {
-            const activityData = activityDoc.data();
-            const activityId = activityDoc.id;
-
-            console.log(`📥 Actividad encontrada: ${activityId}`, activityData);
-
-            const activityCard = document.createElement("div");
-            activityCard.classList.add("activity-card");
-            activityCard.innerHTML = `
-                <h3>${activityData.title || "Untitled Activity"}</h3>
-                <p>${activityData.description || "No description available."}</p>
-                <button onclick="openActivity('${moduleId}', '${activityId}')">Start Activity</button>
-            `;
-
-            activityGrid.appendChild(activityCard);
-        });
-    } catch (error) {
-        console.error("❌ Error al cargar actividades:", error);
-        activityGrid.innerHTML = "<p>Error loading activities. Please try again later.</p>";
-    }
-}
-
-/**
- * ===================================================
- * FUNCIÓN: Abrir una actividad específica
- * ===================================================
- */
-window.openActivity = function(moduleId, activityId) {
-    window.location.href = `activity.html?module=${moduleId}&activity=${activityId}`;
-};
-
-/**
- * ===================================================
- * FUNCIÓN: Cargar los módulos de aprendizaje dinámicamente
- * ===================================================
- */
-async function loadLearningModules() {
-    const modulesMenu = document.getElementById("modules-menu");
-    if (!modulesMenu) return;
-
-    modulesMenu.innerHTML = ""; // Limpiar antes de insertar contenido
-
-    try {
-        const modulesRef = collection(db, "modules");
-        const querySnapshot = await getDocs(modulesRef);
+        const activitiesRef = collection(db, `modules/${moduleId}/activities`);
+        const querySnapshot = await getDocs(activitiesRef);
 
         if (querySnapshot.empty) {
-            console.warn("⚠️ No hay módulos en la base de datos.");
-            modulesMenu.innerHTML = "<p>No modules available</p>";
+            console.warn("⚠️ No hay actividades disponibles en este módulo.");
+            activityGrid.innerHTML = "<p class='no-activities'>⚠️ No activities available in this module.</p>";
             return;
         }
 
-        // 🔹 Crear el título de la sección
-        const title = document.createElement("h3");
-        title.classList.add("modules-title");
-        title.innerText = "LEARNING MODULES";
-        modulesMenu.appendChild(title);
-
-        // 🔹 Línea de separación
-        const separator = document.createElement("hr");
-        separator.classList.add("modules-separator");
-        modulesMenu.appendChild(separator);
+        let activitiesHTML = "";
 
         querySnapshot.forEach((doc) => {
-            const moduleData = doc.data();
-            const moduleId = doc.id;
+            const activity = doc.data();
+            console.log("📌 Actividad cargada:", activity);
 
-            console.log(`📥 Módulo encontrado: ${moduleId}`, moduleData);
+            if (!activity.isVisible) return; // 🔹 Solo mostrar actividades visibles
 
-            // 🔹 Crear cada módulo como un enlace con icono de carpeta
-            const moduleItem = document.createElement("a");
-            moduleItem.href = `activities.html?module=${moduleId}`;
-            moduleItem.classList.add("module-item");
-            moduleItem.innerHTML = `<i class="fas fa-folder"></i> ${moduleData.name}`;
-
-            modulesMenu.appendChild(moduleItem);
+            activitiesHTML += `
+                <div class="activity-card" onclick="redirectToActivity('${moduleId}', '${doc.id}')">
+                    <div class="card-header">
+                        <h3>${activity.activityName}</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>${activity.activityDesc}</p>
+                        <button class="start-button">Start Activity</button>
+                    </div>
+                </div>
+            `;
         });
+
+        activityGrid.innerHTML = activitiesHTML;
     } catch (error) {
-        console.error("❌ Error al cargar módulos:", error);
+        console.error("❌ Error al obtener actividades:", error);
+        activityGrid.innerHTML = "<p class='error-message'>⚠️ Error loading activities. Check the console.</p>";
     }
 }
+
+//===========================================================================
+// 🔹 FUNCIÓN PARA REDIRIGIR A `activity.html` CON LA ACTIVIDAD SELECCIONADA
+//===========================================================================
+window.redirectToActivity = function (moduleId, activityId) {
+    window.location.href = `activity.html?module=${moduleId}&activity=${activityId}`;
+};

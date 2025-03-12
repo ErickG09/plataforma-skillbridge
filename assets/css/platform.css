@@ -833,3 +833,526 @@ body {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+
+#modules-container {
+    padding: 10px 15px;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+#modules-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#modules-list li {
+    margin-bottom: 8px;
+}
+
+#modules-list button {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: transparent; /* Fondo transparente */
+    border: 2px solid #4A90E2; /* Borde azul */
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#modules-list button:hover {
+    background-color: #4A90E2; /* Azul vibrante al pasar el mouse */
+    color: white;
+}
+
+#modules-list button:active {
+    background-color: #357ABD; /* Azul más oscuro al hacer clic */
+}
+
+
+/* 🔹 Contenedor general de los módulos */
+.menu {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+/* 🔹 Botones de los módulos - Similar al botón "Help & Support" */
+.module-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2D3E50; /* Azul oscuro */
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 14px;
+    margin: 8px 0;
+    text-align: center;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* 🔹 Hover: Cambio de color y efecto sutil */
+.module-button:hover {
+    background-color: #3B4F65;
+    border-color: #66FCF1; /* Borde brillante */
+    transform: translateY(-2px);
+    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 🔹 Efecto cuando se presiona */
+.module-button:active {
+    transform: scale(0.98);
+}
+
+/* 🔹 Módulo activo/seleccionado */
+.module-button.active {
+    background-color: #66FCF1; /* Azul claro */
+    color: #142B43; /* Texto oscuro */
+    font-weight: bold;
+    border-color: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(102, 252, 241, 0.7);
+}
+
+/* 🔹 Icono dentro del módulo */
+.module-button i {
+    margin-right: 10px;
+    font-size: 18px;
+    color: #66FCF1; /* Azul neón */
+}
+
+/* 🔹 Mensaje cuando no hay módulos */
+.menu p {
+    color: #bbb;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+
+.question-block {
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.question-text {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.text-answer {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.option-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: #f8f8f8;
+    transition: background 0.3s;
+}
+
+.option-button.selected {
+    background: #4caf50;
+    color: white;
+}
+
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+#score-container {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 20px;
+    padding: 10px;
+    background: #4caf50;
+    color: white;
+    border-radius: 10px;
+}
+
+
+.question-block {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.text-answer {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* 🔹 Estilos para los botones de opción múltiple */
+.option-button {
+    border: 2px solid #007BFF;
+    background-color: white;
+    color: #007BFF;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    font-size: 16px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+.option-button.selected {
+    background-color: #28a745;
+    color: white;
+    border: 2px solid #28a745;
+}
+
+/* 🔹 Estilos para el botón de Check Answers */
+.submit-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.submit-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* 🔹 Estilos para el botón de Next Exercise */
+.next-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.next-button:hover {
+    background-color: #218838;
+}
+
+/* 🔹 Estilos para la pantalla del Score */
+.score-display {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+}
+
+/* 🔹 Estilo General para los Contenedores de Botones */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* 🔹 Botón "Check Answers" */
+.submit-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    width: 200px;
+    text-align: center;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.submit-button:disabled {
+    background-color: #d6d6d6;
+    cursor: not-allowed;
+}
+
+/* 🔹 Botón "Finish & Return" */
+.finish-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    width: 200px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.finish-button:hover {
+    background-color: #218838;
+}
+
+/* 🔹 Contenedor del Score */
+.score-display {
+    background-color: #ffffff;
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #007bff;
+    margin-top: 10px;
+    width: fit-content;
+    min-width: 180px;
+}
+
+.answer-text {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 2px solid #3498db;
+    border-radius: 5px;
+    outline: none;
+    margin-top: 5px;
+}
+
+.answer-text:disabled {
+    background-color: #e0e0e0;
+    border: 2px solid #bdc3c7;
+}
+
+
+/* ============================= */
+/* 🔹 ESTILOS RESPONSIVOS 🔹 */
+/* ============================= */
+
+/* ✅ Para pantallas más pequeñas (tablets y móviles grandes) */
+@media (max-width: 1024px) {
+    .main-content {
+        padding: 1.5rem;
+    }
+
+    .question-block {
+        padding: 15px;
+    }
+
+    .option-button {
+        font-size: 1rem;
+        padding: 10px 16px;
+    }
+
+    .submit-button, .finish-button {
+        font-size: 1rem;
+        padding: 10px 18px;
+    }
+
+    .score-display {
+        font-size: 18px;
+        padding: 10px;
+    }
+}
+
+/* ✅ Para móviles en modo vertical */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+        overflow: auto;
+    }
+
+    /* 📌 Menú lateral como hamburguesa */
+    .sidebar {
+        width: 250px;
+        position: fixed;
+        height: 100%;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 2000;
+    }
+
+    /* 📌 Mostrar menú cuando está activo */
+    .sidebar.show {
+        transform: translateX(0);
+    }
+
+    /* 📌 Botón de menú hamburguesa */
+    .menu-toggle {
+        display: block;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        background: #1e2a47;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 1.3rem;
+        cursor: pointer;
+        z-index: 3000;
+    }
+
+    /* 📌 Cerrar menú */
+    .close-menu {
+        display: block;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+
+    /* 📌 Contenido principal */
+    .main-content {
+        padding: 1rem;
+    }
+
+    /* 📌 Tarjetas de preguntas más compactas */
+    .question-block {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    /* 📌 Botones ajustados */
+    .option-button {
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    /* 📌 Contenedor del Score */
+    .score-display {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    /* 📌 Botones más accesibles */
+    .submit-button, .finish-button {
+        width: 100%;
+        font-size: 1rem;
+    }
+}
+
+/* ✅ Para móviles más pequeños */
+@media (max-width: 480px) {
+    /* 📌 Espaciado general */
+    .main-content {
+        padding: 0.8rem;
+    }
+
+    /* 📌 Títulos más pequeños */
+    #activity-title {
+        font-size: 1.6rem;
+    }
+
+    /* 📌 Preguntas en formato más reducido */
+    .question-block {
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    /* 📌 Inputs de respuestas */
+    .answer-text {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    /* 📌 Botones más compactos */
+    .option-button {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    /* 📌 Score ajustado */
+    .score-display {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    /* 📌 Botones de acción más anchos */
+    .submit-button, .finish-button {
+        font-size: 0.9rem;
+        padding: 10px;
+        width: 100%;
+    }
+
+    /* 📌 Sidebar más delgado */
+    .sidebar {
+        width: 220px;
+    }
+
+    /* 📌 Íconos más pequeños */
+    .menu-item i {
+        font-size: 1rem;
+    }
+}
+
+/* ✅ Para pantallas grandes (más de 1200px) */
+@media (min-width: 1200px) {
+    .main-content {
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    /* 📌 Hacer que los botones sean más grandes */
+    .option-button {
+        font-size: 1.2rem;
+        padding: 12px;
+    }
+
+    .submit-button, .finish-button {
+        font-size: 1.2rem;
+        padding: 14px 24px;
+    }
+
+    /* 📌 Score más visible */
+    .score-display {
+        font-size: 22px;
+        padding: 14px;
+    }
+}
+

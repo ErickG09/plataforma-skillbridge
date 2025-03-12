@@ -8,9 +8,9 @@ import {
     getFirestore, 
     doc, 
     getDoc, 
-    setDoc, 
     collection, 
-    getDocs 
+    getDocs, 
+    setDoc 
 } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js";
 
 // 🔹 Configuración de Firebase
@@ -29,229 +29,260 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 // 🔹 Variables de estado
-let selectedAnswers = {}; 
-let correctAnswers = {}; 
-let exercises = []; 
 let currentUser = null;
+let currentExerciseIndex = 0;
+let exercises = [];
+let userAnswers = {}; 
 
-/**
- * ===================================================
- * 🔹 Verificar autenticación antes de cargar la página
- * ===================================================
- */
-document.addEventListener("DOMContentLoaded", () => {
-    onAuthStateChanged(auth, async (user) => {
-        if (!user) {
-            console.warn("⚠️ No hay usuario autenticado. Redirigiendo a login...");
-            window.location.href = "index.html";
-            return;
-        }
-    
-        currentUser = user;
-        console.log(`✅ Usuario autenticado: ${user.uid}`);
-    
-        try {
-            // 🔹 Obtener el nombre del usuario desde Firestore
-            const userRef = doc(db, "users", user.uid);
-            const userSnap = await getDoc(userRef);
-    
-            if (userSnap.exists()) {
-                const userName = userSnap.data().name || "User";
-                document.getElementById("user-name").innerText = `Hello, ${userName}`;
-            }
-    
-            // 🔹 Obtener parámetros de la URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const moduleId = urlParams.get("module");
-            const activityId = urlParams.get("activity");
-    
-            if (!moduleId || !activityId) {
-                window.location.href = "platform.html";
-                return;
-            }
-    
-            console.log(`📥 Cargando ejercicios de: ${moduleId} > ${activityId}`);
-            loadExercises(moduleId, activityId);
-        } catch (error) {
-            console.error("❌ Error al obtener los datos del usuario:", error);
-        }
-    });
-});
+// 🔹 Obtener parámetros de la URL
+const urlParams = new URLSearchParams(window.location.search);
+const moduleId = urlParams.get("module");
+const activityId = urlParams.get("activity");
 
-/**
- * ===================================================
- * 🔹 FUNCIÓN: Cargar la lista de ejercicios desde Firebase
- * ===================================================
- */
-async function loadExercises(moduleId, activityId) {
-    const container = document.getElementById("question-container");
-    container.innerHTML = "<p>Loading exercises...</p>";
+// 🔹 Redirigir si no hay datos válidos en la URL
+if (!moduleId || !activityId) {
+    console.error("❌ No se encontró el módulo o la actividad en la URL. Redirigiendo...");
+    window.location.href = "platform.html";
+}
 
-    const exercisesRef = collection(db, "modules", moduleId, "activities", activityId, "exercises");
-    const exercisesSnapshot = await getDocs(exercisesRef);
-
-    if (exercisesSnapshot.empty) {
-        container.innerHTML = "<p>⚠️ No exercises available for this activity.</p>";
+// 🔹 Verificar autenticación del usuario
+onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+        console.warn("⚠️ Usuario no autenticado. Redirigiendo al login...");
+        window.location.href = "index.html";
         return;
     }
 
-    exercises = exercisesSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-
-    container.innerHTML = `<h1 class="exercise-title">Select an Exercise</h1><br>`; 
-
-    exercises.forEach((exercise) => {
-        const exerciseCard = document.createElement("div");
-        exerciseCard.classList.add("exercise-card");
-        exerciseCard.innerHTML = `
-            <h3>${exercise.title}</h3>
-            <p>${exercise.description}</p>
-            <button onclick="startExercise('${moduleId}', '${activityId}', '${exercise.id}')">Start Exercise</button>
-        `;
-        container.appendChild(exerciseCard);
-    });
-}
-
-/**
- * ===================================================
- * 🔹 FUNCIÓN: Mostrar un ejercicio específico
- * ===================================================
- */
-window.startExercise = async function(moduleId, activityId, exerciseId) {
-    const container = document.getElementById("question-container");
-    container.innerHTML = "<p>Loading exercise...</p>";
-    
-    console.log(`🚀 Intentando cargar el ejercicio: ${exerciseId}`);
+    currentUser = user;
+    console.log(`✅ Usuario autenticado: ${user.uid}`);
 
     try {
-        // 📌 Obtener el ejercicio de Firebase
-        const exerciseRef = doc(db, "modules", moduleId, "activities", activityId, "exercises", exerciseId);
-        const exerciseSnap = await getDoc(exerciseRef);
+        // Obtener datos del usuario desde Firestore
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
 
-        // 📌 Validar si el ejercicio existe
-        if (!exerciseSnap.exists()) {
-            console.error(`❌ Error: El ejercicio ${exerciseId} no existe en Firebase.`);
-            container.innerHTML = "<p>⚠️ Error: El ejercicio no existe en la base de datos.</p>";
+        if (userSnap.exists()) {
+            const userName = userSnap.data().name || "Student";
+            document.getElementById("user-name").innerText = `Hello, ${userName}`;
+        } else {
+            console.warn("⚠️ No se encontró el usuario en la base de datos.");
+        }
+    } catch (error) {
+        console.error("❌ Error al obtener el nombre del usuario:", error);
+    }
+
+    await loadExercises();
+});
+
+
+//===========================================================================
+// 🔹 FUNCIÓN PARA CARGAR LOS EJERCICIOS
+//===========================================================================
+window.loadExercises = async function () {
+    const container = document.getElementById("question-container");
+    container.innerHTML = "<p>📦 Loading exercises...</p>";
+
+    try {
+        const exercisesRef = collection(db, `modules/${moduleId}/activities/${activityId}/ejercicios`);
+        const exercisesSnapshot = await getDocs(exercisesRef);
+
+        if (exercisesSnapshot.empty) {
+            container.innerHTML = "<p>⚠️ No exercises available for this activity.</p>";
             return;
         }
 
-        // 📌 Obtener los datos del ejercicio
-        let exerciseData = exerciseSnap.data();
-        console.log(`📥 Datos cargados de ${exerciseId}:`, exerciseData);
+        exercises = exercisesSnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
 
-        // 🔴 VERIFICACIÓN IMPORTANTE: ¿`questions` está en el objeto?
-        if (!exerciseData.hasOwnProperty("questions")) {
-            console.error(`❌ Error: El ejercicio ${exerciseId} no tiene 'questions' en Firebase.`);
-            container.innerHTML = `<p>⚠️ Error: Este ejercicio no tiene preguntas. Revisa la base de datos.</p>`;
+        let exercisesHTML = `<h2 class="exercise-title">Select an Exercise</h2>`;
+
+        exercises.forEach((exercise, index) => {
+            exercisesHTML += `
+                <div class="exercise-card">
+                    <h3>${exercise.exerciseName}</h3>
+                    <p>${exercise.exerciseDesc}</p>
+                    <button onclick="startExercise(${index})">Start Exercise</button>
+                </div>
+            `;
+        });
+
+        container.innerHTML = exercisesHTML;
+    } catch (error) {
+        console.error("❌ Error al obtener ejercicios:", error);
+        container.innerHTML = "<p>⚠️ Error loading exercises.</p>";
+    }
+};
+
+
+//===========================================================================
+// 🔹 FUNCIÓN PARA CARGAR UN EJERCICIO
+//===========================================================================
+window.startExercise = async function (index) {
+    currentExerciseIndex = index;
+    const exercise = exercises[index];
+    const container = document.getElementById("question-container");
+
+    container.innerHTML = "<p>📦 Loading questions...</p>";
+
+    try {
+        // Verificar si el usuario ya completó el ejercicio
+        const userExerciseRef = doc(db, "users", currentUser.uid, "completedActivities", `${activityId}_${exercise.id}`);
+        const userExerciseSnap = await getDoc(userExerciseRef);
+        let alreadyCompleted = false;
+        let savedAnswers = {};
+
+        if (userExerciseSnap.exists()) {
+            alreadyCompleted = true;
+            savedAnswers = userExerciseSnap.data().answers;
+        }
+
+        // Obtener preguntas del ejercicio
+        const questionsRef = collection(db, `modules/${moduleId}/activities/${activityId}/ejercicios/${exercise.id}/preguntas`);
+        const questionsSnapshot = await getDocs(questionsRef);
+
+        if (questionsSnapshot.empty) {
+            container.innerHTML = `<p>⚠️ No questions available.</p>`;
             return;
         }
 
-        // 📌 Verificar que `questions` es un array válido
-        const questions = exerciseData.questions;
-        console.log(`📋 Preguntas encontradas (${questions.length}):`, questions);
+        let questionsHTML = `
+            <button class="back-button" onclick="loadExercises()">⬅ Back to Exercises</button>
+            <h2 class="exercise-title">${exercise.exerciseName}</h2>
+            <p class="exercise-description">${exercise.exerciseDesc}</p>
+            <div class="questions-list">
+        `;
 
-        if (!Array.isArray(questions) || questions.length === 0) {
-            console.error(`❌ Error: El ejercicio ${exerciseId} tiene 'questions', pero está vacío o mal formateado.`);
-            container.innerHTML = `<p>⚠️ Error: Este ejercicio no tiene preguntas válidas. Revisa la base de datos.</p>`;
-            return;
-        }
+        questionsSnapshot.forEach((questionDoc) => {
+            const question = questionDoc.data();
+            const questionId = questionDoc.id;
+            const savedAnswer = savedAnswers[questionId] || "";
 
-        // 🔹 Obtener respuestas anteriores del usuario
-        console.log("🔍 Buscando respuestas anteriores del usuario...");
-        const userAnswersRef = doc(db, "users", currentUser.uid, "answers", exerciseId);
-        const userAnswersSnap = await getDoc(userAnswersRef);
-        let previousAnswers = userAnswersSnap.exists() ? userAnswersSnap.data().responses : {};
-        console.log("✅ Respuestas previas cargadas:", previousAnswers);
-
-        selectedAnswers = previousAnswers;
-        correctAnswers = {};
-
-        // 🔍 Validación para asegurar que cada pregunta tenga las propiedades correctas
-        console.log("🔄 Construyendo las preguntas para mostrar...");
-        const questionBlocks = questions.map((q, index) => {
-            if (!q || !q.options || !Array.isArray(q.options)) {
-                console.warn(`⚠️ Pregunta inválida en índice ${index}:`, q);
-                return `<p class="error-message">⚠️ Error en la pregunta ${index + 1}. Datos inválidos.</p>`;
-            }
-
-            correctAnswers[index] = q.correctAnswer ?? "";
-
-            // 🔹 Resaltar palabras subrayadas si existen
-            const formattedQuestion = q.underlinedWords && Array.isArray(q.underlinedWords)
-                ? q.underlinedWords.reduce((text, word) => 
-                    text.replace(word, `<span class="highlighted-word">${word}</span>`), 
-                    q.question)
-                : q.question;
-
-            return `
-                <div class="question-block"> 
-                    <p class="question-text">${formattedQuestion}</p>
+            questionsHTML += `
+                <div class="question-block">
+                    <p class="question-text">${question.questionText}</p>
+                    ${question.questionBaseText ? `<p class="base-text">${question.questionBaseText}</p>` : ""}
                     <div class="options">
-                        ${q.options.map(option => `
-                            <button class="option-button ${previousAnswers[index] === option ? 'selected' : ''}" 
-                                data-question="${index}" 
-                                onclick="selectAnswer('${exerciseId}', ${index}, '${option}')">
-                                ${option}
-                            </button>
-                        `).join("")}
+                        ${question.options && question.options.length
+                            ? question.options.map(option => `
+                                <button class="option-button ${savedAnswer === option ? "selected" : ""}" 
+                                        onclick="selectAnswer('${questionId}', '${option}')" ${alreadyCompleted ? "disabled" : ""}>
+                                    ${option}
+                                </button>
+                            `).join("")
+                            : `<input type="text" class="answer-text" id="answer-${questionId}" value="${savedAnswer}" 
+                                    placeholder="Your answer" oninput="saveTextAnswer('${questionId}')" ${alreadyCompleted ? "disabled" : ""}>`}
                     </div>
                 </div>
             `;
-        }).join("");
+        });
 
-        console.log("✅ Preguntas construidas correctamente.");
-
-        container.innerHTML = `
-            <button class="back-button" onclick="goBackToExercises('${moduleId}', '${activityId}')">⬅ Back to Exercises</button>
-            <h2 class="exercise-title">${exerciseData.title}</h2>
-            <p class="exercise-description">${exerciseData.description}</p>
-            ${questionBlocks}
-            <div class="score-container">
-                <p id="score-display">Score: ${userAnswersSnap.exists() ? userAnswersSnap.data().score : "-"}</p>
-                <button class="check-button" onclick="calculateScore('${exerciseId}')">Check Answers</button>
+        questionsHTML += `
             </div>
+            <button class="submit-button" onclick="submitAnswers()" ${alreadyCompleted ? "disabled" : ""}>Check Answers</button>
+            ${currentExerciseIndex < exercises.length - 1 ? `<button class="next-button" onclick="startExercise(${index + 1})">Next Exercise</button>` : `<button class="finish-button" onclick="finishActivity()">Finish & Return</button>`}
+            <div class="score-display" id="score-display">${alreadyCompleted ? `<h3>Your Score: ${userExerciseSnap.data().score}</h3>` : ""}</div>
         `;
 
+        container.innerHTML = questionsHTML;
     } catch (error) {
-        console.error("❌ Error en startExercise:", error);
-        container.innerHTML = "<p>⚠️ Error al cargar el ejercicio. Intenta nuevamente.</p>";
+        console.error("❌ Error al cargar el ejercicio:", error);
+        container.innerHTML = "<p>⚠️ Error loading exercise.</p>";
     }
 };
 
 
 
-
-/**
- * ===================================================
- * 🔹 FUNCIÓN: Seleccionar respuesta y guardarla en Firebase
- * ===================================================
- */
-window.selectAnswer = async function(exerciseId, questionIndex, answer) {
-    selectedAnswers[questionIndex] = answer;
-
-    const userAnswersRef = doc(db, "users", currentUser.uid, "answers", exerciseId);
-    await setDoc(userAnswersRef, { responses: selectedAnswers }, { merge: true });
-
-    document.querySelectorAll(`.option-button[data-question="${questionIndex}"]`).forEach(btn => btn.classList.add("disabled"));
+//===========================================================================
+// 🔹 FUNCIÓN PARA SELECCIONAR RESPUESTA
+//===========================================================================
+// 🔹 FUNCIÓN PARA SELECCIONAR RESPUESTA Y APLICAR ESTILO
+window.selectAnswer = function (questionId, answer) {
+    userAnswers[questionId] = answer;
+    document.querySelectorAll(`.option-button`).forEach(btn => {
+        if (btn.getAttribute("onclick")?.includes(questionId)) {
+            btn.classList.remove("selected");
+        }
+    });
+    document.querySelectorAll(`.option-button`).forEach(btn => {
+        if (btn.textContent === answer) {
+            btn.classList.add("selected");
+        }
+    });
 };
 
-/**
- * ===================================================
- * 🔹 FUNCIÓN: Calcular Score y Guardarlo en Firebase
- * ===================================================
- */
-window.calculateScore = async function(exerciseId) {
-    let correct = Object.keys(selectedAnswers).filter(index => selectedAnswers[index] === correctAnswers[index]).length;
-    let score = `${correct} / ${Object.keys(correctAnswers).length}`;
-    document.getElementById("score-display").innerText = `Score: ${score}`;
 
-    await setDoc(doc(db, "users", currentUser.uid, "answers", exerciseId), { score, responses: selectedAnswers }, { merge: true });
+//===========================================================================
+// 🔹 FUNCIÓN PARA ENVIAR RESPUESTAS Y CALCULAR SCORE
+//===========================================================================
+window.submitAnswers = async function () {
+    let score = 0;
+    const container = document.getElementById("score-display");
+    const exercise = exercises[currentExerciseIndex];
+
+    // Obtener preguntas y comparar respuestas
+    const questionsRef = collection(db, `modules/${moduleId}/activities/${activityId}/ejercicios/${exercise.id}/preguntas`);
+    const questionsSnapshot = await getDocs(questionsRef);
+
+    questionsSnapshot.forEach((questionDoc) => {
+        const questionData = questionDoc.data();
+        const questionId = questionDoc.id;
+        let userAnswer = userAnswers[questionId];
+
+        if (userAnswer) {
+            userAnswer = userAnswer.trim().toLowerCase();
+            let correctAnswer = questionData.answer.trim().toLowerCase();
+
+            if (userAnswer === correctAnswer) {
+                score += 1;  // Sumar puntos solo si es correcta
+            }
+        }
+    });
+
+    // Mostrar Score en la pantalla
+    container.innerHTML = `<h3>Your Score: ${score}</h3>`;
+
+    // Guardar respuestas y puntaje en Firestore
+    await setDoc(doc(db, "users", currentUser.uid, "completedActivities", `${activityId}_${exercise.id}`), {
+        answers: userAnswers,
+        score: score,
+    });
+
+    alert(`🚀 Answers submitted! Your score is: ${score}`);
+
+    // Deshabilitar opciones después de enviar respuestas
+    document.querySelectorAll(".option-button").forEach(btn => btn.setAttribute("disabled", "true"));
+    document.querySelectorAll(".answer-text").forEach(input => input.setAttribute("disabled", "true"));
+    document.querySelector(".submit-button").setAttribute("disabled", "true");
 };
 
-/**
- * ===================================================
- * 🔹 FUNCIÓN: Regresar a la lista de ejercicios
- * ===================================================
- */
-window.goBackToExercises = function(moduleId, activityId) {
-    loadExercises(moduleId, activityId);
+
+
+
+
+//===========================================================================
+// 🔹 FUNCIÓN PARA TERMINAR LA ACTIVIDAD
+//===========================================================================
+window.finishActivity = function () {
+    alert("🎉 You have completed the activity!");
+    window.location.href = "platform.html";
+};
+
+
+window.saveTextAnswer = function (questionId) {
+    const inputElement = document.getElementById(`answer-${questionId}`);
+    if (inputElement) {
+        userAnswers[questionId] = inputElement.value;
+    }
+};
+
+
+
+// 🔹 FUNCIÓN PARA GUARDAR RESPUESTAS EN TIEMPO REAL
+window.storeTextAnswer = function (questionId) {
+    let inputField = document.getElementById(`answer-${questionId}`);
+    if (inputField) {
+        userAnswers[questionId] = inputField.value;
+    }
 };

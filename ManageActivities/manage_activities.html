@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Actividades</title>
+    <link rel="stylesheet" href="/assets/css/manage_activities.css">
+</head>
+<body>
+    <button onclick="window.location.href='/platform.html'" class="back-button">🔙 Regresar</button>
+
+<div class="container">
+
+    <h2>Registrar Actividades</h2>
+
+    <!-- 🔹 Div para mostrar mensajes de éxito o error -->
+    <div id="message-box" class="message-box hidden"></div>
+
+    <!-- 🔹 Botón para regresar a la plataforma principal -->
+
+
+    <form id="activity-form">
+        <label>Module:</label>
+        <select id="module-select" required>
+            <option value="Grammar">Grammar</option>
+            <option value="Listening">Listening</option>
+            <option value="Reading">Reading</option>
+            <option value="Written">Written</option>
+        </select>
+
+
+        <label>Nombre de la actividad:</label>
+        <input type="text" id="activity-name" required>
+
+        <label>Descripción de la actividad:</label>
+        <textarea id="activity-desc" required></textarea>
+
+        <!-- 🔹 Nueva opción para hacer visible/invisible la actividad -->
+        <label for="activity-visible">Visible para usuarios:</label>
+        <input type="checkbox" id="activity-visible" checked>
+
+        <label>Cantidad de ejercicios:</label>
+        <input type="number" id="exercise-count" min="1" required>
+
+        <button type="button" onclick="generateExerciseFields()">Generar Ejercicios</button>
+
+        <div id="exercises-container"></div>
+
+        <button type="submit">Registrar Actividad</button>
+    </form>
+
+    <h3>📌 Administrar Actividades</h3>
+    <div id="activity-list">
+        <p>Cargando actividades...</p>
+    </div>
+
+</div>
+
+<script type="module" src="/assets/js/manage_activities.js"></script>
+</body>
+</html>

@@ -2,8 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
 import { 
     getAuth, 
-    signInWithEmailAndPassword, 
-    sendPasswordResetEmail 
+    signInWithEmailAndPassword 
 } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js";
 import { 
     getFirestore, 
@@ -34,19 +33,20 @@ console.log("✅ Firebase inicializado correctamente");
 const loginForm = document.getElementById("login-form");
 const matriculaInput = document.getElementById("matricula");
 const passwordInput = document.getElementById("password");
-const errorMessage = document.getElementById("error-message");
-const forgotPasswordButton = document.getElementById("forgot-password");
+const errorMessage = document.createElement("div");
+errorMessage.classList.add("error-message");
+loginForm.appendChild(errorMessage);
 
 // ✅ INICIAR SESIÓN CON MATRÍCULA Y CONTRASEÑA
 if (loginForm) {
     loginForm.addEventListener("submit", async (event) => {
         event.preventDefault();
 
-        const matricula = matriculaInput.value.trim();
+        const matricula = matriculaInput.value.trim().toUpperCase();
         const password = passwordInput.value.trim();
 
         if (!matricula || !password) {
-            showErrorMessage("⚠️ Por favor, completa todos los campos.");
+            showErrorMessage("Por favor, ingresa tu matrícula y contraseña.");
             return;
         }
 
@@ -59,7 +59,7 @@ if (loginForm) {
             const querySnapshot = await getDocs(q);
 
             if (querySnapshot.empty) {
-                showErrorMessage("❌ Matrícula no encontrada. Verifica con el administrador.");
+                showErrorMessage("Matrícula no encontrada. Verifica con el administrador.");
                 return;
             }
 
@@ -71,7 +71,7 @@ if (loginForm) {
             });
 
             if (!userData.email) {
-                showErrorMessage("❌ Error: No se encontró un email vinculado a esta matrícula.");
+                showErrorMessage("Error: No se encontró un email vinculado a esta matrícula.");
                 return;
             }
 
@@ -80,27 +80,26 @@ if (loginForm) {
             // 🔹 Intentar iniciar sesión con el email y la contraseña
             await signInWithEmailAndPassword(auth, userData.email, password);
 
-            // ✅ Inicio de sesión exitoso
+            // Inicio de sesión exitoso
             console.log(`✅ Usuario autenticado: ${userData.email}`);
-            showSuccessMessage("✅ Inicio de sesión exitoso. Redirigiendo...");
+            showSuccessMessage("Inicio de sesión exitoso. Redirigiendo...");
 
             // Guardar el nombre del usuario en localStorage para futuras páginas
             localStorage.setItem("username", userData.name);
+            localStorage.setItem("userRole", userData.role);
 
             setTimeout(() => {
                 window.location.href = "platform.html";
             }, 1500);
         } catch (error) {
-            console.error("❌ Error al iniciar sesión:", error);
+            console.error("Error al iniciar sesión:", error);
 
-            if (error.code === "permission-denied") {
-                showErrorMessage("🚫 No tienes permisos suficientes para iniciar sesión. Verifica con el administrador.");
-            } else if (error.code === "auth/wrong-password") {
-                showErrorMessage("❌ Contraseña incorrecta. Intenta de nuevo.");
+            if (error.code === "auth/wrong-password") {
+                showErrorMessage("Contraseña incorrecta. Intenta de nuevo.");
             } else if (error.code === "auth/user-not-found") {
-                showErrorMessage("❌ Usuario no encontrado. Verifica tu matrícula.");
+                showErrorMessage("Usuario no encontrado. Verifica tu matrícula.");
             } else {
-                showErrorMessage("❌ Error al iniciar sesión. Inténtalo de nuevo.");
+                showErrorMessage("Error al iniciar sesión. Inténtalo de nuevo.");
             }
         }
     });
@@ -110,34 +109,18 @@ if (loginForm) {
     passwordInput.addEventListener("input", clearErrorMessage);
 }
 
-// ✅ FUNCIÓN PARA RESTABLECER CONTRASEÑA
-if (forgotPasswordButton) {
-    forgotPasswordButton.addEventListener("click", async () => {
-        const email = prompt("✉️ Ingresa tu correo electrónico para restablecer la contraseña:");
-        if (!email) return;
-
-        try {
-            await sendPasswordResetEmail(auth, email);
-            showSuccessMessage("✅ Correo de recuperación enviado. Revisa tu bandeja de entrada.");
-        } catch (error) {
-            console.error("❌ Error al enviar el correo de recuperación:", error);
-            showErrorMessage("❌ No se pudo enviar el correo de recuperación. Verifica tu email.");
-        }
-    });
-}
-
 // ✅ FUNCIÓN PARA MOSTRAR MENSAJES DE ERROR
 function showErrorMessage(message) {
     errorMessage.innerHTML = `<p>${message}</p>`;
-    errorMessage.classList.add("error-message");
+    errorMessage.classList.add("message-error");
     errorMessage.style.display = "block";
 }
 
 // ✅ FUNCIÓN PARA MOSTRAR MENSAJE DE ÉXITO
 function showSuccessMessage(message) {
     errorMessage.innerHTML = `<p>${message}</p>`;
-    errorMessage.classList.remove("error-message");
-    errorMessage.classList.add("success-message");
+    errorMessage.classList.remove("message-error");
+    errorMessage.classList.add("message-success");
     errorMessage.style.display = "block";
 }
 
