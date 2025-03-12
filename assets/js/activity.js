@@ -33,7 +33,7 @@ let currentUser = null;
 let currentExerciseIndex = 0;
 let exercises = [];
 let userAnswers = {}; 
-
+//hola
 // 🔹 Obtener parámetros de la URL
 const urlParams = new URLSearchParams(window.location.search);
 const moduleId = urlParams.get("module");
